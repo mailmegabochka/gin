@@ -1,5 +1,18 @@
-- name: Qodana Scan
-  # You may pin to the exact commit or the version.
-  # uses: JetBrains/qodana-action@f8a64bc18ee8f15e4a7c6e092270c470da7ad091
-  uses: JetBrains/qodana-action@v2022.2.2
- 
+name: Qodana
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'releases/*'
+
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: 'Qodana Scan'
+        uses: JetBrains/qodana-action@v2022.2.2
